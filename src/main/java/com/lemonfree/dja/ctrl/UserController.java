@@ -1,10 +1,10 @@
 package com.lemonfree.dja.ctrl;
 
+import com.lemonfree.dja.service.StatisticService;
 import com.lemonfree.dja.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user")
 public class UserController {
 
-	private UserService userService;
+	private final UserService userService;
+
+	private final StatisticService statisticService;
 
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, StatisticService statisticService) {
 		this.userService = userService;
+		this.statisticService = statisticService;
 	}
 
 	/**

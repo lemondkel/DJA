@@ -1,7 +1,9 @@
 package com.lemonfree.dja.job;
 
 import com.lemonfree.dja.common.DTDJob;
+import com.lemonfree.dja.entity.Statistic;
 import com.lemonfree.dja.entity.User;
+import com.lemonfree.dja.service.StatisticService;
 import com.lemonfree.dja.service.UserService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,6 +35,9 @@ public class Job0001 extends DTDJob {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private StatisticService statisticService;
+
 	private List<User> userList;
 
 	@PostConstruct
@@ -42,19 +47,30 @@ public class Job0001 extends DTDJob {
 	}
 
 	/**
-	 * 2시마다 일배치 실행 - 백준 풀었는지 안풀었는지 체크
+	 * 23시 30분마다 일배치 실행 - 백준 풀었는지 안풀었는지 체크하여 DB 적재
 	 *
 	 * @author l2jong
 	 * @since 2021-02-28
 	 */
-	@Scheduled(cron = "0 * * * * *") // 왼쪽부터 초/분/시/일/월/요일/[선택]연도
+	@Scheduled(cron = "0 30 23 * * *") // 왼쪽부터 초/분/시/일/월/요일/[선택]연도
 	@Override
 	public void makeJob() {
 		extract();
+
+		userList = userService.findAll();
+		for (int i = 0; i < userList.size(); i++) {
+			getCrawlingData(userList.get(i)); // ID 이용하여 크롤링
+		}
+
+		// transform();
+		// load();
+	}
+
+	private void getCrawlingData(User user) {
 		Date today = new Date();
 		try {
-			Document doc = Jsoup.connect("https://www.acmicpc.net/status?user_id=duruaal").header("Content-Type", "application/json;charset=UTF-8").get();
-//		logger.info(doc.html());
+			Document doc = Jsoup.connect("https://www.acmicpc.net/status?user_id=" + user.getName()).header("Content-Type", "application/json;charset=UTF-8").get();
+			logger.info(user.getName() + "님 차례!");
 
 			// 4. 요소 탐색
 			// 4-1. Attribute 탐색
@@ -80,7 +96,7 @@ public class Job0001 extends DTDJob {
 						diff = (diff / (1000 * 60 * 60 * 24));
 						System.out.println(diff + "일 차이!");
 
-						if (diff == 0 || diff == -1) {
+						if (diff == 0) {
 							Elements correctElements = fileblocks.get(i).select(".result-ac");
 							if (correctElements.size() > 0) {
 								correctCount++;
@@ -99,14 +115,18 @@ public class Job0001 extends DTDJob {
 				}
 
 				System.out.println(correctCount + "개 맞음!");
+
+				Statistic statistic = new Statistic();
+				statistic.setCreatedDate(today);
+				statistic.setTitle("백준 알고리즘!");
+				statistic.setUser(user);
+				statistic.setCorrectCount(correctCount);
+
+				statisticService.save(statistic);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
-		// transform();
-		// load();
 	}
 
 	@Override
