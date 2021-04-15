@@ -1,6 +1,7 @@
 package com.lemonfree.dja.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class Statistic {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column
 	private Date createdDate;
 
