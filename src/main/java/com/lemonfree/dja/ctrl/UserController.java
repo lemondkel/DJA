@@ -20,7 +20,7 @@ public class UserController {
 	}
 
 	/**
-	 * 사용자 PUT
+	 * 사용자 RANK
 	 *
 	 * @return ModelAndView
 	 * @author l2jong
