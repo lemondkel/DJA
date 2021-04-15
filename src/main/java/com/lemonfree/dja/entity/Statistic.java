@@ -28,4 +28,7 @@ public class Statistic {
 	@JoinColumn(name = "user_id",
 			referencedColumnName = "id")
 	private User user;
+
+	@Transient
+	private String nameStr;
 }
