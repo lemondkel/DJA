@@ -38,7 +38,7 @@
 				<p th:text="${itemStat.count}"></p>
 			</div>
 			<div class="col-xs-3">
-				<p th:text="${item.createdDate}"></p>
+				<p th:text="${#temporals.format(item.createdDate, 'yyyy-MM-dd')}"></p>
 			</div>
 			<div class="col-xs-4">
 				<a th:href="${'https://www.acmicpc.net/status?user_id=' + item.user.name}"><p th:text="${item.user.name}"></p></a>
