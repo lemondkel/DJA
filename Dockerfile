@@ -11,10 +11,10 @@ VOLUME /tmp
 EXPOSE 49005
 
 # The application's jar file
-ARG JAR_FILE=build/libs/MySpringApp-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/dja-0.0.1-SNAPSHOT.war
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} to-do-springboot.jar
+ADD ${JAR_FILE} AlgorithmApp.war
 
 # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/to-do-springboot.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-war","/to-do-springboot.war"]
