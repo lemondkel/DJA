@@ -37,8 +37,10 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("user/rank");
 
 		List<Statistic> statisticList = statisticService.findAll();
+		String names = userService.getNames();
 
 		mav.addObject("statisticList", statisticList);
+		mav.addObject("names", names);
 
 		return mav;
 	}

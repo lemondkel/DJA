@@ -19,7 +19,8 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Override
 	public List<Statistic> findAll() {
-		return (List<Statistic>) statisticRepository.findAll();
+		Sort sort = Sort.by(Sort.Direction.ASC, "createdDate", "user_id");
+		return (List<Statistic>) statisticRepository.findAll(sort);
 	}
 
 	@Override

@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
 		PageRequest pageRequest = PageRequest.of(pageNo, Constant.COMMON_PAGING_SIZE, Sort.by("id").descending());
 		return userRepository.findAll(pageRequest).getContent();
 	}
+
+	@Override
+	public String getNames() {
+		return userRepository.getNames();
+	}
 }

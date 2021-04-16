@@ -21,4 +21,6 @@ public interface UserService {
 	void deleteAll();
 
 	List<User> findAllByPageNo(int pageNo);
+
+	String getNames();
 }
