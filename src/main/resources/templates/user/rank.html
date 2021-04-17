@@ -44,7 +44,7 @@
 				<a th:href="${'https://www.acmicpc.net/status?user_id=' + item.user.name}"><p th:text="${item.user.name}"></p></a>
 			</div>
 			<div class="col-xs-2">
-				<p><span th:if="${item.correctCount < 2}">&#10008;</span><span th:if="${item.correctCount >= 2}">&#10004;</span> (<span th:text="${item.correctCount}"></span>)</p>
+				<p><span th:if="${item.correctCount < 2}"><span style="color: darkred">&#10008;</span></span><span th:if="${item.correctCount >= 2}"><span style="color: darkgreen">&#10004;</span></span> (<span th:text="${item.correctCount}"></span>)</p>
 			</div>
 		</div>
 

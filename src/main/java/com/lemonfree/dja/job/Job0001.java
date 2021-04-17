@@ -78,10 +78,10 @@ public class Job0001 extends DTDJob {
 			Elements fileblocks = doc.select("table#status-table tbody tr");
 
 			logger.info("사이즈:" + fileblocks.size());
+			int correctCount = 0;
 			if (fileblocks.size() == 0) {
-				logger.debug("데이터가 없는 사용자!");
+				logger.info("데이터가 없는 사용자!");
 			} else {
-				int correctCount = 0;
 				for (int i = 0; i < fileblocks.size(); i++) {
 					Elements timestamps = fileblocks.get(i).select("a[data-timestamp]");
 					Date date = null;
@@ -113,17 +113,16 @@ public class Job0001 extends DTDJob {
 						// Next crawling..?!
 					}
 				}
-
-				System.out.println(correctCount + "개 맞음!");
-
-				Statistic statistic = new Statistic();
-				statistic.setCreatedDate(today);
-				statistic.setTitle("백준 알고리즘!");
-				statistic.setUser(user);
-				statistic.setCorrectCount(correctCount);
-
-				statisticService.save(statistic);
 			}
+			System.out.println(correctCount + "개 맞음!");
+
+			Statistic statistic = new Statistic();
+			statistic.setCreatedDate(today);
+			statistic.setTitle("백준 알고리즘!");
+			statistic.setUser(user);
+			statistic.setCorrectCount(correctCount);
+
+			statisticService.save(statistic);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
