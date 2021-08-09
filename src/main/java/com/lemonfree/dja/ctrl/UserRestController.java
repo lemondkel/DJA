@@ -124,6 +124,14 @@ public class UserRestController {
 		return ajaxResult;
 	}
 
+	/**
+	 * 수동 크롤링 기능
+	 *
+	 * @author l2jong
+	 * @since 2021-08-09
+	 * @param yyyyMMdd 년월일
+	 * @return
+	 */
 	@GetMapping(value = "/manual/get/{yyyyMMdd}")
 	public AjaxResult getCrawlingDataAPI(@PathVariable("yyyyMMdd") String yyyyMMdd) {
 		AjaxResult ajaxResult;
