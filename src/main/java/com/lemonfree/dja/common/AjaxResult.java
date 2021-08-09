@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+/**
+ * Ajax 통신결과 응답 Dto
+ *
+ * @author leedujong
+ * @since 2021-04-24
+ */
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 @NoArgsConstructor
 @Data

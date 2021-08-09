@@ -11,6 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+/**
+ * user rank page
+ *
+ * @author leedujong
+ * @since 2021-04-24
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {

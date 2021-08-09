@@ -3,6 +3,12 @@ package com.lemonfree.dja.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Batch Job Abstract Class
+ *
+ * @author l2jong
+ * @since 2021-04-24
+ */
 public abstract class Job {
 
 	private String jobId;
